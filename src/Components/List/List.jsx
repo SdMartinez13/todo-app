@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings/Settings';
-import { Card, Button, Text, Box, Pagination, Badge, Group, createStyles, StylesApiProvider } from '@mantine/core';
+import { Card, Button, Text, Box, Pagination, Badge, createStyles } from '@mantine/core';
 import './list.scss'
 
 

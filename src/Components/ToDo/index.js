@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import { SettingsContext } from '../../Context/Settings/Settings';
-import AddForm from '../AddForm/AddForm.jsx';
-import List from '../List/List'
+// import AddForm from '../AddForm/AddForm.jsx';
+// import List from '../List/List'
 import { Text, createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
