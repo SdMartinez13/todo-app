@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings/Settings';
 import useForm from '../../hooks/form.js';
-import { Menu, Button, Group, TextInput, Text, Space, createStyles } from '@mantine/core';
+import {  Button, TextInput, Text, Space, createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   form: {
