@@ -5,10 +5,21 @@ export const SettingsContext = React.createContext();
 
 const SettingsProvider = ({children}) => {
   const [list, setList] = useState([]);
+  const [showCompleted, setShowCompleted] = useState(false);
   const [incomplete, setIncomplete] = useState([]);
+  const [sort, setSort] = useState ('difficulty');
   const [defaultValues] = useState({
     difficulty: 4,
   });
+
+  const values = {
+    showCompleted,
+    // pageItems, 
+    sort,
+    setShowCompleted,
+    // SetPageItems,
+    setSort,
+  }
 
   function addItem(item) {
     item.id = uuid();
@@ -47,7 +58,7 @@ const SettingsProvider = ({children}) => {
 
   return (
 
-    <SettingsContext.Provider value={{list, setList, incomplete, setIncomplete, toggleComplete, addItem, defaultValues, deleteItem, }}>
+    <SettingsContext.Provider value={{values, list, setList, incomplete, setIncomplete, showCompleted, setShowCompleted, toggleComplete, addItem, defaultValues, deleteItem, }}>
       {children}
     </SettingsContext.Provider>
 
