@@ -8,20 +8,22 @@ const SettingsProvider = ({children}) => {
   const [showCompleted, setShowCompleted] = useState(false);
   const [incomplete, setIncomplete] = useState([]);
   const [sort, setSort] = useState ('difficulty');
+  const [page, pageItems, setPageItems] = useState(3);
   const [defaultValues] = useState({
     difficulty: 4,
   });
 
   const values = {
     showCompleted,
-    // pageItems, 
+    pageItems, 
     sort,
     setShowCompleted,
-    // SetPageItems,
+    setPageItems,
     setSort,
+    page
   }
 
-  function addItem(item) {
+  function addItem({...item}) {
     item.id = uuid();
     item.complete = false;
     console.log(item);
