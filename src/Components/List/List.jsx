@@ -1,5 +1,6 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { When } from 'react-if';
 import { SettingsContext } from '../../Context/Settings/Settings';
 import { Card, Button, Text, Box, Pagination, Badge, createStyles } from '@mantine/core';
 import './list.scss'
@@ -55,15 +56,22 @@ const useStyles = createStyles((theme) => ({
 
 const List = ({ children }) => {
 
-  const { list, deleteItem, toggleComplete } = useContext(SettingsContext);
+  const { list, deleteItem, toggleComplete, showCompleted, pageItems } = useContext(SettingsContext);
+  const [page, setPage] = useState(1);
   const { classes } = useStyles();
+
+  const listToRender = showCompleted ? list : list.filter(item => !item.complete)
+  const listStart = pageItems * (page - 1);
+  const listEnd = listStart + pageItems;
+  const pageCount = Math.ceil(listToRender.length / pageItems);
+  const displayList = listToRender.slice(listStart, listEnd);
 
   console.log(list, "LIST!!!")
   return (
 
     <Box className={classes.box}>
       <div>
-        {list.map(item => (
+        {displayList.map(item => (
           <Card className={classes.card} p={0} mt={0} mb={10} key={item.id}>
             {/* <Group m={0} className={classes.list}> */}
               <div className='cardHeader' style={{ backgroundColor: '' }}>
@@ -103,8 +111,11 @@ const List = ({ children }) => {
 
       {!!list.length && (
 
+      <When condition={listToRender.length > 0}>
         <Pagination
-          total={5}
+          page={page}
+          onChange={setPage}
+          total={pageCount}
           position="center"
           styles={(theme) => ({
             item: {
@@ -114,6 +125,8 @@ const List = ({ children }) => {
             },
           })}
         />
+      </When>
+
       )}
     </Box>
 
