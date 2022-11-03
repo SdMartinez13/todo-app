@@ -54,9 +54,9 @@ const useStyles = createStyles((theme) => ({
 }))
 
 
-const List = ({ children }) => {
+const List = ({ children , toggleComplete, deleteItem, list }) => {
 
-  const { list, deleteItem, toggleComplete, showCompleted, pageItems } = useContext(SettingsContext);
+  const { showCompleted, pageItems } = useContext(SettingsContext);
   const [page, setPage] = useState(1);
   const { classes } = useStyles();
 
@@ -76,8 +76,8 @@ const List = ({ children }) => {
             {/* <Group m={0} className={classes.list}> */}
               <div className='cardHeader' style={{ backgroundColor: '' }}>
                 <div className={classes.cardHeaderStatus}>
-                  <Badge className={classes.badge} color="green" variant="solid">
-                    Pending
+                  <Badge onClick={()=> toggleComplete(item.id)}className={classes.badge} color={item.complete ? "green" : "red"} variant="solid">
+                    {item.complete ? "complete" : "pending"}
                   </Badge>
                   <Text><small>Assigned to: {item.assignee}</small></Text>
                 </div>
@@ -97,7 +97,7 @@ const List = ({ children }) => {
 
               <div className={classes.cardFooter}>
                 <Text><small>Difficulty: {item.difficulty}</small></Text>
-                <Button variant={item.complete ? 'subtle' : 'filled' } color={item.complete ? 'green' : 'blue'} onClick={() => toggleComplete(item.id)}>{item.complete ? 'Completed' : 'Complete'}</Button>
+                {/* <Button variant={item.complete ? 'subtle' : 'filled' } color={item.complete ? 'green' : 'blue'} onClick={() => toggleComplete(item.id)}>{item.complete ? 'Completed' : 'Complete'}</Button> */}
               </div>
 
               </div>

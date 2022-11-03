@@ -6,11 +6,12 @@ const useForm = (callback, defaultValues={}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    callback(values);
+    callback({...values});
   };
 
   const handleChange = (event) => {
-    event.persist();
+    
+// see build out code
 
     let { name, value } = event.target;
     if (parseInt(value)) {

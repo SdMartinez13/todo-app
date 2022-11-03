@@ -1,32 +1,134 @@
-import {useContext} from 'react';
+import React from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings/Settings';
-// import AddForm from '../AddForm/AddForm.jsx';
-// import List from '../List/List'
-import { Text, createStyles } from '@mantine/core';
+import List from '../List/List'
+import useForm from '../../hooks/form.js';
+import { v4 as uuid } from 'uuid';
+
+import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
-  text: {
-    backgroundColor: '#343A40',
-    borderBottom: 0,
-    padding: 10,
-    color: 'white',
-    // margin: 20,
-    // text: '',
+  form: {
+    backgroundColor: '',
+    borderBottom: 2,
+    padding: 20,
+    // color: 'white',
+    margin: 0,
+    text: 'bold',
+    border: 'solid',
+    borderColor: '#DFE3E6',
+    width: '30%',
   },
+  h1: {
+        backgroundColor: theme.colors.gray[8],
+        color: theme.colors.gray[0],
+        width: '80%',
+        margin: 'auto',
+        fontSize: theme.fontSizes.lg,
+        padding: theme.spacing.md,
+        marginBottom: theme.spacing.md,
+        marginTop: theme.spacing.md,
+      }
 }))
-const ToDo = () => {
 
-  const { incomplete } = useContext(SettingsContext);
+const ToDo = ({ children }) => {
+  const { list, setList } = useContext(SettingsContext);
+  const [incomplete, setIncomplete] = useState([]);
+
+  const [defaultValues] = useState({
+    difficulty: 4,
+  });
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
   const { classes } = useStyles();
 
 
+  function addItem({ ...item }) {
+    item.id = uuid();
+    item.complete = false;
+    console.log(item);
+    setList([...list, item]);
+  }
+
+  function toggleComplete(id) {
+
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
+      }
+      return item;
+    });
+
+    setList(items);
+
+  }
+
+  function deleteItem(id) {
+    const items = list.filter(item => item.id !== id);
+    setList(items);
+  }
+
+  useEffect(() => {
+    let incompleteCount = list.filter(item => !item.complete).length;
+    setIncomplete(incompleteCount);
+    document.title = `To Do List: ${incomplete}`;
+    // linter will want 'incomplete' added to dependency array unnecessarily. 
+    // disable code used to avoid linter warning 
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [list]);
+
   return (
     <>
-      <header data-testid="todo-header">
-        <Text className={classes.text} data-testid="todo-h1">To Do List: {incomplete} items pending</Text>
-      </header>
-      {/* <AddForm />
-      <List /> */}
+      
+      <h1 className={classes.h1} data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
+
+      <Grid style={{ width: '80%', margin: 'auto' }}>
+        <Grid.Col xs={12} sm={4}>
+          <Card withBorder p="xs">
+
+            <form onSubmit={handleSubmit}>
+
+            <Text className={classes.formHeading}>Add To Do Item</Text>
+
+              <TextInput
+                required label="To Do Item"
+                onChange={handleChange}
+                name="text"
+                type="text"
+                placeholder="Item Details"
+              />
+
+              <TextInput
+                label="Assigned To"
+                onChange={handleChange}
+                name="assignee"
+                placeholder="Assignee Name"
+              />
+
+              <Text>Difficulty</Text>
+              <Slider
+                onChange={handleChange}
+                defaultValue={defaultValues.difficulty}
+                type="range"
+                min={0}
+                max={5}
+                name="difficulty"
+                step={1}
+                mb="lg"
+              />
+
+              <Button type="submit">Add Item</Button>
+
+            </form>
+          </Card>
+        </Grid.Col>
+        <Grid.Col xs={12} sm={8}>
+          <List
+            list={list}
+            toggleComplete={toggleComplete}
+            deleteItem={deleteItem}
+          />
+        </Grid.Col>
+      </Grid>
     </>
   );
 };
