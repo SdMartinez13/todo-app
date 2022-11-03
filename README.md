@@ -53,7 +53,8 @@ Stephen Martinez
 
 ## UML
 
-![UML-coming soon]()
+![UML-coming soon](/Assets/lab31.png)
+- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
 ## Deployment
 
@@ -100,7 +101,9 @@ Note: You will need to stringify your state prior to saving to local storage, an
 
 ## UML
 
-![UML-coming soon]()
+![UML-coming soon](/Assets/lab32.png)
+- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
+
 
 ## Deployment
 
@@ -184,7 +187,9 @@ Display a logout button instead of a form if they are “Logged In”.
 
 ## UML
 
-![UML-coming soon]()
+![UML-coming soon](/Assets/lab33.png)
+- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
+
 
 ## Deployment
 
