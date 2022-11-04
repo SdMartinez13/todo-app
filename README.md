@@ -246,7 +246,7 @@ Building off of your previous day’s branch, create a new branch for today call
 
 ## UML
 
-![UML-coming soon]()
+![UML-coming soon](/Assets/34lab.png)
 
 ## Deployment
 
