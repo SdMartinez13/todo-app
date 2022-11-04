@@ -1,50 +1,59 @@
-import React from 'react';
-import {When} from 'react-if';
+import { TextInput, Button, Text } from "@mantine/core";
+import { useContext, useState } from "react";
+import { AuthContext } from "../auth/context";
+import { When } from 'react-if';
 
-import { LoginContext } from './context.js';
+const Login = () => {
+  const {
+    login,
+    logout,
+    loggedIn,
+    user,
+  } = useContext(AuthContext);
 
-class Login extends React.Component {
-  static contextType = LoginContext;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  constructor(props) {
-    super(props);
-    this.state = { username: '', password: '' };
+  const usernameHandler = (e) => {
+    setUsername(e.target.value);
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.context.login(this.state.username, this.state.password);
-  };
-
-  render() {
-    return (
-      <>
-        <When condition={this.context.loggedIn}>
-          <button onClick={this.context.logout}>Log Out</button>
-        </When>
-
-        <When condition={!this.context.loggedIn}>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              placeholder="UserName"
-              name="username"
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="password"
-              name="password"
-              onChange={this.handleChange}
-            />
-            <button>Login</button>
-          </form>
-        </When>
-      </>
-    );
+  const passwordHandler = (e) => {
+    setPassword(e.target.value);
   }
+  const loginHandler = () => {
+    login(username, password);
+  }
+
+  const logoutHandler = () => {
+    logout();
+  }
+
+  return (
+    <>
+      <TextInput
+        placeholder="Username"
+        label="Username"
+        onChange={usernameHandler}
+      />
+      <TextInput
+        placeholder="Password"
+        label="Password"
+        onChange={passwordHandler}
+      />
+      <When condition={loggedIn}>
+        <Button type="button" onClick={logoutHandler}>
+          Logout
+        </Button>
+        <Text>user: {JSON.stringify(user)}</Text>
+      </When>
+      <When condition={!loggedIn}>
+        <Button type="button" onClick={loginHandler}>
+          Login
+        </Button>
+      </When>
+    </>
+  )
 }
 
 export default Login;
