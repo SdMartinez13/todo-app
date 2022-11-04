@@ -11,7 +11,6 @@ const useForm = (callback, defaultValues={}) => {
 
   const handleChange = (event) => {
     
-// see build out code
 
     let { name, value } = event.target;
     if (parseInt(value)) {

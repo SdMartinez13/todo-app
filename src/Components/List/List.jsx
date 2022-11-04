@@ -76,13 +76,13 @@ const List = ({ children , toggleComplete, deleteItem, list }) => {
             {/* <Group m={0} className={classes.list}> */}
               <div className='cardHeader' style={{ backgroundColor: '' }}>
                 <div className={classes.cardHeaderStatus}>
-                  <Badge onClick={()=> toggleComplete(item.id)}className={classes.badge} color={item.complete ? "green" : "red"} variant="solid">
+                  <Badge onClick={()=> toggleComplete(item._id)}className={classes.badge} color={item.complete ? "green" : "red"} variant="solid">
                     {item.complete ? "complete" : "pending"}
                   </Badge>
                   <Text><small>Assigned to: {item.assignee}</small></Text>
                 </div>
 
-                <Button variant="subtle" color="gray" onClick={() => deleteItem(item.id)}>
+                <Button variant="subtle" color="gray" onClick={() => deleteItem(item._id)}>
                   x
                 </Button>
               </div>
