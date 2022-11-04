@@ -54,6 +54,7 @@ Stephen Martinez
 ## UML
 
 ![UML-coming soon](/Assets/lab31.png)
+
 - worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
 ## Deployment
@@ -102,8 +103,8 @@ Note: You will need to stringify your state prior to saving to local storage, an
 ## UML
 
 ![UML-coming soon](/Assets/lab32.png)
-- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
+- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
 ## Deployment
 
@@ -188,11 +189,67 @@ Display a logout button instead of a form if they are “Logged In”.
 ## UML
 
 ![UML-coming soon](/Assets/lab33.png)
-- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
+- worked with [JunYoung Son](https://github.com/Junyoungson808) to complete UMLs
 
 ## Deployment
 
 [Linked to Deployed Site]()CODESANDBOX WONT LOAD
 
 [PR Link](https://github.com/SdMartinez13/todo-app/pull/5)
+
+## Phase 4
+
+- In this final phase, we’ll be requiring that users be logged in through a live authentication server, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them. All To Do items will be stored in a database, accessed through a deployed API
+
+## Before you begin
+
+- Refer to Getting Started in the [lab submission instructions](https://codefellows.github.io/code-401-javascript-guide/reference/submission-instructions/labs/) for complete setup, configuration, deployment, and submission instructions.
+
+Building off of your previous day’s branch, create a new branch for today called ‘auth’ and continue to work in your ‘todo’ repository.
+
+## Phase 4 Requirements
+
+- In Phase 4, we will finalize the functionality of the application by connecting to live servers for login, authorization, and data access
+
+## Technical Requirements / Notes
+
+    - Technical requirements for the core application are unchanged from the prior phases, with the addition of Performing actual HTTP requests with an Authenticated API server:
+
+- Alter the Add, Toggle Complete, and Delete functions within your to do application to use your API instead of in memory state.
+  - Fetch the current list of items from the database on application start
+  - Whenever you add/update/delete an item, refresh the state so the user can instantly see the change
+    - Consider: Do you re-fetch from the server every time you make a change?
+    - If so, how?
+    - If not, how will you stay in sync?
+- Alter the Login Context to use the server to login users instead of our mock users list.
+  - Be sure to store the token in state as well as in a cookie so you can reference it later.
+
+
+### API Server
+
+- You will need deployed API Server, which implements a todo item data model
+  - GET /todo: Gets a list of all items
+  - ‘POST /todo’: Adds an item
+  - ‘PUT /todo’: Updates an item (you’ll use this to mark them as complete)
+  - ‘DELETE /todo/:id’ : Deletes an item
+
+### Authentication Server
+
+- You will need a deployed Authenticated API Server, which supports:
+  - Registration (/signup)
+  - Login (/signin)
+  - Authorization (via Bearer Token)
+  - ACL (using user roles)
+    - Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into
+  - To Do data model for storing the actual to do items
+
+## UML
+
+![UML-coming soon]()
+
+## Deployment
+
+[Linked to Deployed Site]()CODESANDBOX WONT LOAD
+
+[PR Link](https://github.com/SdMartinez13/todo-app/pull/6)
