@@ -7,6 +7,10 @@ const SettingsProvider = ({children}) => {
   const [showCompleted, setShowCompleted] = useState(true);
   const [sort, setSort] = useState ('difficulty');
   const [pageItems, setPageItems] = useState(3);
+
+  const saveLocally = ({showCompleted, pageItems, sort}) => {
+    localStorage.setItem('todo', JSON.stringify({showCompleted, pageItems, sort}))
+  };
   
 
   const values = {
@@ -18,6 +22,7 @@ const SettingsProvider = ({children}) => {
     setSort,
     setList,
     list,
+    saveLocally,
   }
 
   
