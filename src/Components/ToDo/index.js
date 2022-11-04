@@ -2,11 +2,11 @@ import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings/Settings';
 
-import AuthContext from '../auth/context';
+// import AuthContext from '../auth/context';
 import List from '../List/List'
 import useForm from '../../hooks/form.js';
 import { v4 as uuid } from 'uuid';
-import cookie from 'react-cookies';
+// import cookie from 'react-cookies';
 
 import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
 
@@ -34,7 +34,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 const ToDo = ({ children }) => {
-  const { _validate } = useContext(AuthContext);
+  // const { _validate } = useContext(AuthContext);
   const { list, setList } = useContext(SettingsContext);
   const [incomplete, setIncomplete] = useState([]);
 
@@ -69,16 +69,16 @@ const ToDo = ({ children }) => {
     const items = list.filter(item => item.id !== id);
     setList(items);
   }
-  useEffect(() => {
-    let token = cookie.load('auth');
-    if(token) {
-      _validate(token)
+  // useEffect(() => {
+  //   let token = cookie.load('auth');
+  //   if(token) {
+  //     _validate(token)
       
-    }
-    // linter will want 'incomplete' added to dependency array unnecessarily. 
-    // disable code used to avoid linter warning 
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, []);
+  //   }
+  //   // linter will want 'incomplete' added to dependency array unnecessarily. 
+  //   // disable code used to avoid linter warning 
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps 
+  // }, []);
 
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
